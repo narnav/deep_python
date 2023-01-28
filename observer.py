@@ -1,51 +1,62 @@
 class Invoker(object):
-        def __init__(self):
+    def __init__(self):
         self._subscribers = []
-    def __iadd__(self,subscriber):
+
+    def __iadd__(self, subscriber):
         self._subscribers.append(subscriber)
         return self
-    def __isub__(self,subscriber):
+
+    def __isub__(self, subscriber):
         if(subscriber in self._subscribers):
             self._subscribers.remove(subscriber)
         return self
-    def Invoke(self,message,exclude=None):
+
+    def Invoke(self, message, exclude=None):
         for s in self._subscribers:
-            if(s!=exclude):
+            if(s != exclude):
                 s(message)
+
+
 def handler1(message):
-    print "handler1 got:" + message
+    print("handler1 got:" + message)
+
 
 def handler2(message):
-    print "handler2 got:" + message
+    print("handler2 got:" + message)
+
 
 def handler3(message):
-    print "handler3 got:" + message
+    print("handler3 got:" + message)
+
 
 def handler4(message):
-    print "handler4 got:" + message
+    print("handler4 got:" + message)
+
 
 class A(object):
-    def __init__(self,val):
-        self.__val=val
-    def handler5(self,message):
-        print "handler1 got:" + message + " with " + str(self.__val)
+    def __init__(self, val):
+        self.__val = val
+
+    def handler5(self, message):
+        print("handler1 got:" + message + " with " + str(self.__val))
+
 
 inv = Invoker()
 
 a1 = A(10)
 a2 = A(20)
 
-inv+=a1.handler5
-inv+=a2.handler5
-inv+=handler1
-inv+=handler2
-inv+=handler3
-inv+=handler1
-inv+=handler4
+inv += a1.handler5
+inv += a2.handler5
+inv += handler1
+inv += handler2
+inv += handler3
+inv += handler1
+inv += handler4
 
 inv.Invoke("Hi all")
 
-inv-=(handler1)
-inv-=(handler1)
+inv -= (handler1)
+inv -= (handler1)
 
-inv.Invoke("Hi all",handler1)
+inv.Invoke("Hi all", handler1)
