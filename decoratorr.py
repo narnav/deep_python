@@ -4,9 +4,10 @@ def smart_divide(func):
         print(func.__name__)
         if b == 0:
             print("Whoops! cannot divide")
-            return # the divide will not be call
+            return  # the divide will not be call
         return func(a, b)
     return inner
+
 
 def type_check(func):
     def inner(*args):
@@ -14,17 +15,18 @@ def type_check(func):
         for n in args:
             if type(n) is not int:
                 print(f"Function {func.__name__} shuold get numbers only")
-                n=1
+                n = 1
             else:
-                n=1
+                n = 1
                 print(func.__name__)
     return inner
 
 
-
 @type_check
-# @smart_divide
+@smart_divide
 def divide(a, b):
-    print(a/b)
+    print(a/"a")
 
-divide(10,2)
+
+# divide(10, 6)
+divide(10, "a")
